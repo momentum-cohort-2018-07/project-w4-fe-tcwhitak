@@ -1,8 +1,51 @@
-// function from clinton that makes itunes API usable with superagent
-// request.get("https://itunes.apple.com/search?term=jack+johnson")
-//   .then(response => JSON.parse(response.text))
-//   .then(body => console.log(body.resultCount))
+
 import 'shoelace-css/dist/shoelace.css'
 import './main.css'
 
 import request from 'superagent'
+
+// grab searchBar
+let searchBar = document.getElementById('searchBar')
+// what happens when you click submit
+searchBar.addEventListener('submit', event => {
+  // don't actually "submit"
+  event.preventDefault()
+  // grab searchField
+  let searchField = document.getElementById('searchField')
+  // get terms from searchBar->searchField, split on spaces, map and trim to new array of search terms
+  let searchTerms = searchField.value.split(' ').map(searchTerm => searchTerm.trim())
+  // convert searchTerms to string and replace commas with + symbols
+  // using RegExp (g denotes to check for multiple)
+  let httpInput = searchTerms.toString().replace(/,/g, '+')
+  // search: start get request that adds httpInput on end of url,
+  request
+    // partial original link: https://itunes.apple.com/search?term=
+    // partial proxy link: https://itunes-api-proxy.glitch.me/search?term=
+    .get('https://itunes.apple.com/search?term=' + httpInput)
+    // parses text to JSON for superagent,
+    .then(response => JSON.parse(response.text))
+    // clears resultsList and runs loop that calls createResultDOM for each item in results array
+    .then(body => {
+      document.getElementById('resultsList').innerHTML = ' '
+      for (let item of body.results) {
+        createResultDOM(item)
+      }
+    })
+  searchBar.reset()
+})
+// function that grabs item data based on wrapperType,
+// formats, and appends to resultsList
+function createResultDOM (item) {
+  if (item.wrapperType === 'track') {
+    // leaving log here as reminder to include for audio later
+    console.log(item.previewUrl)
+
+    let resultsList = document.getElementById('resultsList')
+    let resultLi = document.createElement('li')
+    resultLi.classList.add('resultItem')
+    resultLi.innerHTML = `<img src="${item.artworkUrl100}" alt="album cover"><br>
+                         <span class="trackName">${item.trackName}</span class="artistName"><br>
+                         <span>${item.artistName}</span>`
+    resultsList.appendChild(resultLi)
+  }
+}
