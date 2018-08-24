@@ -39,13 +39,17 @@ function createResultDOM (item) {
   if (item.wrapperType === 'track') {
     // leaving log here as reminder to include for audio later
     console.log(item.previewUrl)
-
+    // grab results list to append new li elements
     let resultsList = document.getElementById('resultsList')
+    // create li for individual search result
     let resultLi = document.createElement('li')
+    // add class for handling in css
     resultLi.classList.add('resultItem')
+    // set inner html of li to contain image, track title, and artist/band name... eventually audio
     resultLi.innerHTML = `<img src="${item.artworkUrl100}" alt="album cover"><br>
                          <span class="trackName">${item.trackName}</span class="artistName"><br>
                          <span>${item.artistName}</span>`
+    // add li to the resultsList
     resultsList.appendChild(resultLi)
   }
 }
