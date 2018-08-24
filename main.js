@@ -4,6 +4,15 @@ import './main.css'
 
 import request from 'superagent'
 
+// add delegated event listener that sets new source for audio and plays audio element
+let resultsList = document.getElementById('resultsList')
+resultsList.addEventListener('click', function (e) {
+  if (e.target && e.target.classList.contains('resultItem')) {
+    console.log('you clicked a song')
+    document.getElementById('songAudio').src = e.target.dataset.previewUrl
+    document.getElementById('songAudio').play()
+  }
+})
 // grab searchBar
 let searchBar = document.getElementById('searchBar')
 // what happens when you click submit
@@ -36,13 +45,13 @@ searchBar.addEventListener('submit', event => {
 // function that grabs item data based on wrapperType,
 // formats, and appends to resultsList
 function createResultDOM (item) {
-  if (item.wrapperType === 'track') {
-    // leaving log here as reminder to include for audio later
-    console.log(item.previewUrl)
+  if (item.kind === 'song') {
     // grab results list to append new li elements
     let resultsList = document.getElementById('resultsList')
     // create li for individual search result
     let resultLi = document.createElement('li')
+    // add preview url to dataset for audio source
+    resultLi.dataset.previewUrl = item.previewUrl
     // add class for handling in css
     resultLi.classList.add('resultItem')
     // set inner html of li to contain image, track title, and artist/band name... eventually audio

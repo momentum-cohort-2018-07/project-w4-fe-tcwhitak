@@ -1,0 +1,15 @@
+#resultsList{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.resultItem {
+    width: 200px;
+    margin: 5px;
+    border: 1px solid #000000;
+}
+
+.hiddenAudio {
+    display: none;
+}
