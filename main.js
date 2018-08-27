@@ -7,10 +7,12 @@ import request from 'superagent'
 // add delegated event listener that sets new source for audio and plays audio element
 let resultsList = document.getElementById('resultsList')
 resultsList.addEventListener('click', function (e) {
-  if (e.target && e.target.classList.contains('resultItem')) {
+  if (e.target && e.target.classList.contains('albumArtwork')) {
     console.log('you clicked a song')
-    document.getElementById('songAudio').src = e.target.dataset.previewUrl
-    document.getElementById('songAudio').play()
+    let musicPlayer = document.getElementById('songAudio')
+    musicPlayer.classList.remove('hiddenAudio')
+    musicPlayer.src = e.target.dataset.url
+    musicPlayer.play()
   }
 })
 // grab searchBar
@@ -51,13 +53,13 @@ function createResultDOM (item) {
     // create li for individual search result
     let resultLi = document.createElement('li')
     // add preview url to dataset for audio source
-    resultLi.dataset.previewUrl = item.previewUrl
+    // resultLi.dataset.previewUrl = item.url
     // add class for handling in css
     resultLi.classList.add('resultItem')
     // set inner html of li to contain image, track title, and artist/band name... eventually audio
-    resultLi.innerHTML = `<img src="${item.artworkUrl100}" alt="album cover"><br>
-                         <span class="trackName">${item.trackName}</span class="artistName"><br>
-                         <span>${item.artistName}</span>`
+    resultLi.innerHTML = `<span class="trackName">${item.trackName}</span><br>
+                          <img class="albumArtwork" data-url="${item.previewUrl}" src="${item.artworkUrl100}" alt="album cover"><br>
+                          <span class="artistName">${item.artistName}</span>`
     // add li to the resultsList
     resultsList.appendChild(resultLi)
   }
