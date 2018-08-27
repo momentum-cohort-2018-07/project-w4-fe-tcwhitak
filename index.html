@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>iTunes Search Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300" rel="stylesheet">
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+    <audio id="songAudio" class="hiddenAudio" controls src="#">
+    </audio>
+    <form id="searchBar">
+        <input  id="searchField" type="text" placeholder="Search" required>
+        <button id="searchButton" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    <div class="resultsDisplay">
+        <ul id="resultsList">
+            <li class = "resultItem" >Search for artists above</li>
+            <!-- <li class = "resultItem" ><img class="albumArtwork" src="#" alt="album cover"><br>
+                <span class="trackName">${item.trackName}</span class="artistName"><br>
+                <span>${item.artistName}</span></li> -->
+        </ul>
+    </div>
+</body>
+
+</html>

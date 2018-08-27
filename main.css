@@ -1,0 +1,57 @@
+
+body {
+    background-color: #595959;
+    color: #595959;
+    font-family: 'Nunito', sans-serif;
+}
+
+#searchBar{
+    margin: 10px 5px;
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 95%;
+}
+
+#searchField{
+   width:90%
+}
+
+#searchButton {
+    margin: 0 0 0 5px;
+    width: 10%;
+}
+
+.resultsDisplay {
+    margin: 50px 0 50px 0;
+}
+
+#resultsList{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.resultItem {
+    background-color: #F3E9DC;
+    width: 200px;
+    margin: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+.albumArtwork{
+    align-self: center;
+    margin: 5px;
+}
+
+.hiddenAudio {
+    display: none;
+}
+
+#songAudio {
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+}
